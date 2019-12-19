@@ -1,0 +1,30 @@
+{
+  "name": "nodeserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "awesome-bootstrap-checkbox": "^1.0.1",
+    "body-parser": "^1.19.0",
+    "bootbox": "^5.3.4",
+    "bootstrap": "^3.4.1",
+    "bootstrap-select": "^1.13.12",
+    "bootstrap-slider": "^10.6.2",
+    "chosenjs": "^1.4.3",
+    "express": "^4.17.1",
+    "interactjs": "^1.7.2",
+    "jQuery-QueryBuilder": "^2.5.2",
+    "jquery": "^3.4.1",
+    "jquery-extendext": "^1.0.0",
+    "jsdom": "^15.2.1",
+    "mysql": "^2.17.1",
+    "selectize": "^0.12.6",
+    "sql-parser-mistic": "^1.2.3"
+  }
+}

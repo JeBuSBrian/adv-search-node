@@ -7,16 +7,18 @@ var path        = require('path');
 var fs          = require('fs');
 const { JSDOM } = require('jsdom');
 
-const html = fs.readFileSync('index-back.html', "utf8");
-var jsdom = new JSDOM(html, { pretendToBeVisual: true, runScripts: 'dangerously', resources: 'usable', url: 'http://node.the-big-box.myds.me' });
+const html  = fs.readFileSync('index-back.html', "utf8");
+var jsdom   = new JSDOM(html, { pretendToBeVisual: true, runScripts: 'dangerously', resources: 'usable', url: 'http://node.the-big-box.myds.me' });
 // Set window and document from jsdom
-var { window } = jsdom;
+var { window }    = jsdom;
+var { document }  = window;
 window.requestAnimationFrame(timestamp => true);
-var { document } = window;
+
 // Also set global window and document before requiring jQuery
-global.window = window;
+global.window   = window;
 global.document = document;
 
+// Make sure we've got an event listener for clicks (maybe unnecessary?)
 document.addEventListener('click', function() {
   //console.log('test');
 });
@@ -32,9 +34,9 @@ window.onModulesLoaded = () => {
 };
 
 // Create a MySQL database connection
-var configPath = 'config.json';
-var dbOptions = JSON.parse(fs.readFileSync(configPath));
-var connection = mysql.createConnection({
+var configPath  = 'config.json';
+var dbOptions   = JSON.parse(fs.readFileSync(configPath));
+var connection  = mysql.createConnection({
   host     : dbOptions.host,
   port     : dbOptions.port,
   user     : dbOptions.user,
@@ -53,7 +55,7 @@ app.use(express.static(nodedir));
 
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+app.use( bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
@@ -61,7 +63,7 @@ var server = app.listen(3000, "localhost", function () {
   var host = server.address().address
   var port = server.address().port
 
-  console.log("Example app listening at http://%s:%s", host, port)
+  console.log("Advanced search listening at http://%s:%s", host, port)
 });
 
 app.param('cardID', function (req, res, next, cardID) {
@@ -206,6 +208,7 @@ app.post('/search/1e', function (req, res) {
   };
 });
 
+// The actual SQL query to get the cards from database
 function getPersonnel(jsonSQL, res, next) {
   var query = `
     SELECT
